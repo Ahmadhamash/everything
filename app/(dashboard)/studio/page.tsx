@@ -30,7 +30,7 @@ export default async function StudioPage() {
       <h1 className="text-2xl font-bold">استوديو المحتوى</h1>
       {mockMode && (
         <div className="rounded-lg border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900">
-          أنت الآن في وضع تجريبي مجاني (Mock Mode). النتائج ليست من Gemini الحقيقي.
+          أنت الآن في وضع تجريبي مجاني (Mock Mode). أضف GEMINI_API_KEY للحصول على نتائج Gemini الحقيقية.
         </div>
       )}
       <form

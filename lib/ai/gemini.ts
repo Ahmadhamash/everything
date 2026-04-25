@@ -10,7 +10,7 @@ export async function generateWithGemini(prompt: string, schema?: object) {
 
   if (!key) {
     if (isMockEnabled()) {
-      return generateMockArabicContent();
+      return generateMockArabicContent(); // fallback for free/local mode
     }
     throw new Error("GEMINI_API_KEY is missing");
   }
@@ -31,7 +31,7 @@ export async function generateWithGemini(prompt: string, schema?: object) {
     return JSON.parse(text);
   } catch (error) {
     if (isMockEnabled()) {
-      return generateMockArabicContent();
+      return generateMockArabicContent(); // fallback for free/local mode
     }
     console.error("Gemini generation failed", error);
     throw new Error("AI generation failed");

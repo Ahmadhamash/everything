@@ -49,6 +49,10 @@ npm run dev
 - Password: `password123`
 
 
+## Environment defaults
+- `.env.example` is configured for **free mock testing by default** (`GEMINI_API_KEY=""`, `AI_MOCK_MODE="true"`).
+- For real Gemini responses, set `GEMINI_API_KEY` and use `AI_MOCK_MODE="false"` in production.
+
 
 ## تشغيل سريع عبر Docker (الأسرع)
 ### Production-like
