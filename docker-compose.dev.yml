@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: ai-store-builder-db-dev
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ai_store_builder
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data_dev:/var/lib/postgresql/data
+
+  app:
+    image: node:20-alpine
+    container_name: ai-store-builder-app-dev
+    working_dir: /app
+    command: sh -c "npm install && npx prisma migrate deploy && npm run prisma:seed && npm run dev"
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    environment:
+      NEXTAUTH_URL: http://localhost:3000
+      AUTH_SECRET: replace-with-long-random-secret
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/ai_store_builder
+      GEMINI_API_KEY: ""
+      AI_MOCK_MODE: "true"
+
+volumes:
+  postgres_data_dev:
